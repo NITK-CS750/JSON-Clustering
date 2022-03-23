@@ -5,7 +5,7 @@ from pathlib import Path
 
 json_data = open('imdb_movies_0.json', 'r').read()
 json_dict = json.loads(json_data)
-# json_dict = [{"a":{"b":"c","d":["e","f",{"g":{"h":"i"}}]}}]
+# json_dict = [{"a":{"b":"c","d":["e","f",{"g":{"h":"i"}}]}},{"d":["e","f",{"g":{"h":"i"}}]}]
 
 def do_walk(datadict):
 
@@ -42,8 +42,8 @@ def do_walk(datadict):
                 for val in stack:
                     all_keys.add(val)
                 final_dict["/".join(stack)] = key
-                print("/".join(stack))
-                print(key)
+                # print("/".join(stack))
+                # print(key)
 
     return (all_keys,final_dict)            
 
@@ -73,7 +73,7 @@ all_keys = set()
 keys_list = set()
 rtl_paths_list = set()
 final_list = []
-
+f = open("keys_list.txt", "w")
 def getDictFromList(input_list):
     l = []
     for ob in input_list:
@@ -90,6 +90,7 @@ for i in range(0,len(json_dict)):
     all_keys = set()                
     keys_list = set()
     rtl_paths_list = set()
+    final_list=[]
     internal(json_dict[i],0)
     keys = json_dict[i].keys()
     q = []
@@ -107,17 +108,19 @@ for i in range(0,len(json_dict)):
         (map,level) = q.pop(0)
         internal(map,level)
         for key in map.keys():
-            if(type(map[key]) is dict):q.append((map[key],level+1))
+            if(type(map[key]) is dict):
+                q.append((map[key],level+1))
             elif(type(map[key]) is list):
                 for object in getDictFromList(map[key]):
                     q.append((object,level+1))
-    print("ITERATION "+str(i)+" : LEN_KEY_0 : "+str(len(final_list[0]['keys']))+" : LEN_RTL_0 : "+str(len(final_list[0]['rtl_paths']))+" : LEN_KEY_1 : "+str(len(final_list[1]['keys']))+" : LEN_RTL_1 : "+str(len(final_list[0]['rtl_paths'])))                
+    f.write(str(final_list)+"\n")               
+    # print("ITERATION "+str(i)+" : LEN_KEY_0 : "+str(len(final_list[0]['keys']))+" : LEN_RTL_0 : "+str(len(final_list[0]['rtl_paths']))+" : LEN_KEY_1 : "+str(len(final_list[1]['keys']))+" : LEN_RTL_1 : "+str(len(final_list[0]['rtl_paths'])))                
+
+f.close()
 
 
 
-
-
-print((final_list))    
+# print((final_list))    
 
 # f = open("keys_list.txt", "w")
 # f.write(str(keys_list))
