@@ -5,11 +5,14 @@ outputs = os.path.join(dir, "..", "outputs")
 
 json_dict = []
 count = 0
-with open(os.path.join(datasets, "imdb"), encoding='utf-8') as f:
-    for line in f:
-        doc = json.loads(line)
-        json_dict.append(doc)
-        count+=1
+# with open(os.path.join(datasets, "Full_Schema.json"), encoding='utf-8') as f:
+#     for line in f:
+#         doc = json.loads(line)
+#         json_dict.append(doc)
+#         count+=1
+with open(os.path.join(datasets, "Full_Schema.json"), encoding='utf-8') as f:
+    json_dict = json.load(f)
+    count = len(json_dict)
 print(count, "documents loaded.")
 
 stack = []
