@@ -51,9 +51,11 @@ This file loads any dataset specified on line 13, and outputs `/outputs/NTL_path
 
 This file generates a file `outputs/similarity_result.csv` that contains the JACCARD similarity scores for a combination of datasets, as configured. Apart from this, several other CSV files are generated, each containing JACCARD and COSINE similarity scores on each dataset, for RTL (Root to Leaf) and NTL (Node to Leaf) paths. These files help us observe and conclude the choice of our structural similarity technique.
 
-## Generate the Semantic Similarity Score for all Pairs of Documents
 
-## Generate the Contextual Similarity Score for all Pairs of Documents
+## Generate the Contextual and Semantic Similarity Score for all Pairs of Documents
+> Run the file `/scripts/contextual_semantic_similarity.ipynb`
+
+This file generates files `bert_scores_context.csv` and `wordnet_semantic.csv` that contains the COSINE similarity and Combined Semantic Similarity scores (with Wu-Palmer and Path Similarities), respectively, for a combination of datasets, as configured. The similarity scores are calculated for sentences generated from the content of considered JSON documents. For the contextual similarity score, we use cosine similarity on embeddings obtained from the BERT Transformer model, while the semantic similarity is calculated using the WordNet lexical database.
 
 ## Combine the Scores and Cluster the Documents
 > Run the file `/scripts/clustering.ipynb`
