@@ -52,7 +52,7 @@ This file generates a file `outputs/similarity_result.csv` that contains the JAC
 > Run the file `/scripts/clustering.ipynb`
 This file applies the (0.5 - 0.25 - 0.25) heuristic threshhold on (Structural - Semantic - Contextual) similarity scores. Then, a dendrogram and K-distance graph are generated to help us find the probable hyperparameters for the clustering process. This is followed by a KMeans implementation to cluster the documents using a custom-metric, that is our similarity score for each pair of document.
 
-
+![Document Similarity Heatmap](https://user-images.githubusercontent.com/55971005/163239965-3436e4f0-1f0c-4b42-8701-32d60907bba0.png)
 
 ---
 
