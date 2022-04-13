@@ -25,6 +25,7 @@ As is obvious, targeted operations have a much lesser overhead in comparison to 
 
 # Packages Required to Run the Project
 > The environment used for development was Python-3.10 and the following pip packages are required
+
 * numpy, pd, matplotlib  
 * json, os  
 * SetSimilaritySearch  
@@ -37,11 +38,13 @@ As is obvious, targeted operations have a much lesser overhead in comparison to 
 ## Load the Dataset
 
 > Run the file `/scripts/ntl_extractor2.py`
+
 This file loads any dataset specified on line 13, and outputs `/outputs/NTL_paths_list.json` containing all NTL paths. To gain more control over this, consider using the file `/scripts/JACCARD_similarity.ipynb`'s opening cells.
 
 ## Generate the Structural Similarity for all Pairs of Documents
 
 > Run the file `/scripts/JACCARD_similarity.ipynb`
+
 This file generates a file `outputs/similarity_result.csv` that contains the JACCARD similarity scores for a combination of datasets, as configured. Apart from this, several other CSV files are generated, each containing JACCARD and COSINE similarity scores on each dataset, for RTL (Root to Leaf) and NTL (Node to Leaf) paths. These files help us observe and conclude the choice of our structural similarity technique.
 
 ## Generate the Semantic Similarity Score for all Pairs of Documents
@@ -50,6 +53,7 @@ This file generates a file `outputs/similarity_result.csv` that contains the JAC
 
 ## Conbine the Scores and Cluster the Documents
 > Run the file `/scripts/clustering.ipynb`
+
 This file applies the (0.5 - 0.25 - 0.25) heuristic threshhold on (Structural - Semantic - Contextual) similarity scores. Then, a dendrogram and K-distance graph are generated to help us find the probable hyperparameters for the clustering process. This is followed by a KMeans implementation to cluster the documents using a custom-metric, that is our similarity score for each pair of document.
 
 ![Document Similarity Heatmap](https://user-images.githubusercontent.com/55971005/163239965-3436e4f0-1f0c-4b42-8701-32d60907bba0.png)
