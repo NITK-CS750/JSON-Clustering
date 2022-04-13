@@ -3,7 +3,9 @@
 
 ---
 
-# What is JSON? Why do we Cluster?
+# Introduction
+
+## What is JSON?
 
 JavaScript Object Notation (JSON) is a widely adopted format for representing structured data in text based format. The notation is derived from the popular JavaScript programming language but its convention can be understood and parsed in several other programming languages. Currently, data is stored and exchanged using the JSON notation. A JSON is commonly structured as an order of key/value pairs. The key is usually a defined string while a value can be of type strings, numbers, booleans, objects or arrays (An ordered list of values). A JSON structure can be represented as a tree.
 
@@ -12,6 +14,8 @@ As mentioned earlier, JSON notations are popularly being used for storing struct
 A JSON document database is arguably the most popular category in the NoSQL family of databases. NoSQL database management differs from traditional relational databases that struggle to store data outside of columns and rows. Instead, they flexibly adapt to a wide variety of data types, changing application requirements and data models. In an era where physical storage limits are no longer a bottleneck, JSON databases deliver superior scale and performance.
 
 JSON document classes are able to do this because of forming JSON clusters or shards. This concept helps reduce overhead over a centralized approach, while increasing query performance.
+
+## Why do we Cluster?
 
 In distributed data systems, there are two types of major query operations that can be performed based on the availability of the requested data on a given shard. These two operations are - targeted operations and broadcast operations. If we take the example of the MongoDB system, there exists an application/driver that will be making the requests, which will be passed to the MongoDB ecosystem. The first point of contact of this request will be a query router, which is connected to a Config server. Now, based on the query, and the shard key that is available, the query will be either routed to a particular targeted shard, or it will be broadcasted to all shards. In case the query contains the shard key of a shard, the operation will be targeted to that particular shard. Otherwise, the query will be routed to all shards, and the collected results are sent back to the application.
 
