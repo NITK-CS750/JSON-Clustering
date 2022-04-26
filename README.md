@@ -32,7 +32,9 @@ As is obvious, targeted operations have a much lesser overhead in comparison to 
 
 * numpy, pd, matplotlib  
 * json, os  
-* SetSimilaritySearch  
+* SetSimilaritySearch
+* SentenceTransformers
+* nltk, re  
 * Jupyter Notebook or similar IDE
 
 ---
@@ -52,15 +54,15 @@ This file loads any dataset specified on line 13, and outputs `/outputs/NTL_path
 This file generates a file `outputs/similarity_result.csv` that contains the JACCARD similarity scores for a combination of datasets, as configured. Apart from this, several other CSV files are generated, each containing JACCARD and COSINE similarity scores on each dataset, for RTL (Root to Leaf) and NTL (Node to Leaf) paths. These files help us observe and conclude the choice of our structural similarity technique.
 
 
-## Generate the Contextual and Semantic Similarity Score for all Pairs of Documents
+## Generate the components needed to generate Structural, Contextual and Semantic Similarity Score for all Pairs of Documents
 > Run the file `/scripts/contextual_semantic_similarity.ipynb`
 
-This file generates files `bert_scores_context.csv` and `wordnet_semantic.csv` that contains the COSINE similarity and Combined Semantic Similarity scores (with Wu-Palmer and Path Similarities), respectively, for a combination of datasets, as configured. The similarity scores are calculated for sentences generated from the content of considered JSON documents. For the contextual similarity score, we use cosine similarity on embeddings obtained from the BERT Transformer model, while the semantic similarity is calculated using the WordNet lexical database.
+This file generates files to aid in the final clustering process of the project. Among the output files, a file titled `scores_final.json` contains the BERT embeddings, WordNet associations and Node-to-Leaf paths of each document. These will be utilized by the `scripts/clustering.ipynb` file to generate a combined similarity score to cluster all the documents appropriately. For the contextual part, embeddings obtained from the BERT Transformer model are obtained, while the semantic similarity is based on the WordNet lexical database associations for each word in a document. 
 
 ## Combine the Scores and Cluster the Documents
 > Run the file `/scripts/clustering.ipynb`
 
-This file applies the (0.5 - 0.25 - 0.25) heuristic threshhold on (Structural - Semantic - Contextual) similarity scores. Then, a dendrogram and K-distance graph are generated to help us find the probable hyperparameters for the clustering process. This is followed by a KMeans implementation to cluster the documents using a custom-metric, that is our similarity score for each pair of document.
+This file calculates the combined similarity scores for every pair of JSON document (using the outputs stored in `scores_final.json` and applies the (0.5 - 0.25 - 0.25) heuristic threshhold on (Structural - Semantic - Contextual) similarity scores. Then, a dendrogram, K-distance graph and an elbow curve are generated to help us find the probable hyperparameters for the clustering process (for Hierarchical, DBSCAN and K-Means respectively). This is followed by a K-Means implementation to cluster the documents using a custom-metric, that is our similarity score for each pair of document.
 
 ![Document Similarity Heatmap](https://user-images.githubusercontent.com/55971005/163239965-3436e4f0-1f0c-4b42-8701-32d60907bba0.png)
 
