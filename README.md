@@ -72,4 +72,4 @@ This file calculates the combined similarity scores for every pair of JSON docum
 * Ishaan Singh  
 * Ikjot Singh Dhody  
 * Ashutosh Anand  
-* Sudarshan Sundarrajan  
+* Sudarshan Sundarrajan
